@@ -2,10 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import * as serviceWorker from './serviceWorker';
 import Slider from './components/Slider';
+import {images} from './data/images';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Slider />
+    <Slider slides={images}/>
   </React.StrictMode>,
   document.querySelector('.main')
 );
