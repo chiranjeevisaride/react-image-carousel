@@ -4,6 +4,8 @@ import { css, jsx } from '@emotion/core'
 import SliderContent from './SliderContent'
 import Slide from './Slide'
 import Arrow from './Arrow'
+import Dots from './Dots'
+
 /**
  * @function Slider
  */
@@ -67,15 +69,15 @@ const Slider = props => {
 
       <Arrow direction="left" handleClick={prevSlide} />
       <Arrow direction="right" handleClick={nextSlide} />
-
+      <Dots slides={props.slides} activeIndex={activeIndex} />
     </div>
   )
 }
 
 const SliderCSS = css`
   position: relative;
-  height: 100vh;
-  width: 100vw;
+  height: 70vh;
+  width: 70vw;
   margin: 0 auto;
   overflow: hidden;
 `
