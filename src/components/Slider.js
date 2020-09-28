@@ -12,7 +12,7 @@ const getWidth = () => window.innerWidth
  * @function Slider
  */
 const Slider = props => {
-  const { slides } = props
+  const { slides, titles } = props
 
   const firstSlide = slides[0]
   const secondSlide = slides[1]
@@ -28,24 +28,32 @@ const Slider = props => {
   const { activeSlide, translate, _slides, transition } = state
 
   const transitionRef = useRef()
-
+  const resizeRef = useRef()
 
   useEffect(() => {
     transitionRef.current = smoothTransition
+    resizeRef.current = handleResize
   })
 
   useEffect(() => {
- 
+   
     const smooth = e => {
       if (e.target.className.includes('SliderContent')) {
         transitionRef.current()
       }
     }
 
+    const resize = () => {
+      resizeRef.current()
+    }
+
     const transitionEnd = window.addEventListener('transitionend', smooth)
-  
+    const onResize = window.addEventListener('resize', resize)
+
+
     return () => {
       window.removeEventListener('transitionend', transitionEnd)
+      window.removeEventListener('resize', onResize)
     }
   }, [])
 
@@ -53,6 +61,9 @@ const Slider = props => {
     if (transition === 0) setState({ ...state, transition: 0.45 })
   }, [transition])
 
+  const handleResize = () => {
+    setState({ ...state, translate: getWidth(), transition: 0 })
+  }
 
   const smoothTransition = () => {
     let _slides = []
@@ -85,28 +96,33 @@ const Slider = props => {
     })
 
   return (
-    <div css={SliderCSS}>
-      <SliderContent
-        translate={translate}
-        transition={transition}
-        width={getWidth() * _slides.length}
-      >
-        {_slides.map((_slide, i) => (
-          <Slide width={getWidth()} key={_slide + i} content={_slide} />
-        ))}
-      </SliderContent>
+      <div>
+        <div css={SliderCSS}>
+        <SliderContent
+          translate={translate}
+          transition={transition}
+          width={getWidth() * _slides.length}
+        >
+          {_slides.map((_slide, i) => (
+            <Slide width={getWidth()} key={_slide + i} content={_slide} />
+          ))}
+        </SliderContent>
 
-      <Arrow direction="left" handleClick={prevSlide} />
-      <Arrow direction="right" handleClick={nextSlide} />
+        <Arrow direction="left" handleClick={prevSlide} />
+        <Arrow direction="right" handleClick={nextSlide} />
 
-      <Dots slides={slides} activeSlide={activeSlide} />
-    </div>
+        <Dots slides={slides} activeSlide={activeSlide} />
+      </div>
+      <div>
+           {titles[activeSlide]} 
+      </div>
+      </div>
   )
 }
 
 const SliderCSS = css`
   position: relative;
-  height: 80vh;
+  height: 70vh;
   width: 100vw;
   margin: 0 auto;
   overflow: hidden;

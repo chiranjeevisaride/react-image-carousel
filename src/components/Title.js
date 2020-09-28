@@ -4,7 +4,7 @@ import { css, jsx } from '@emotion/core'
 
 
 
-const Title = ({ slides}) => (
+const Title = ({ slides, activeSlide}) => (
   <div
     css={css`
       position: absolute;
@@ -15,9 +15,7 @@ const Title = ({ slides}) => (
       justify-content: center;
     `}
   >
-    {slides.map((slide, i) => (
-      <Dot key={slide} active={activeSlide === i} />
-    ))}
+    {slides[activeSlide].Title}
   </div>
 )
 
