@@ -8,13 +8,13 @@ const Title = ({titleText}) => (
   <div
     css={css`
       position: absolute;
-      bottom: 400px;
+      bottom: 200px;
       width: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
       letter-spacing:5px;
-      font-size: 50px;
+      font-size: 30px;
       font-weight: bold;
       color: #191970;
     `}
