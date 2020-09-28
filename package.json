@@ -2,7 +2,7 @@
   "name": "react-image-carousel",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://github.com/chiranjeevisaride/react-image-carousel",
+  "homepage": "https://chiranjeevisaride.github.io/react-image-carousel",
   "dependencies": {
     "@emotion/core": "^10.0.35",
     "@emotion/styled": "^10.0.27",
@@ -20,7 +20,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d pages"
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
