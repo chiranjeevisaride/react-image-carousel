@@ -6,79 +6,111 @@ import Slide from './Slide'
 import Arrow from './Arrow'
 import Dots from './Dots'
 
+const getWidth = () => window.innerWidth
+
 /**
  * @function Slider
  */
 const Slider = props => {
-  const getWidth = () => window.innerWidth
+  const { slides } = props
+
+  const firstSlide = slides[0]
+  const secondSlide = slides[1]
+  const lastSlide = slides[slides.length - 1]
 
   const [state, setState] = useState({
-    activeIndex: 0,
-    translate: 0,
-    transition: 0.45
+    activeSlide: 0,
+    translate: getWidth(),
+    transition: 0.45,
+    _slides: [lastSlide, firstSlide, secondSlide]
   })
 
-  const { translate, transition, activeIndex } = state
+  const { activeSlide, translate, _slides, transition } = state
 
-  const prevSlide = () => {
-      console.log('prevSlide');
-      if (activeIndex === 0) {
-        return setState({
-          ...state,
-          translate: (props.slides.length - 1) * getWidth(),
-          activeIndex: props.slides.length - 1
-        })
+  const transitionRef = useRef()
+
+
+  useEffect(() => {
+    transitionRef.current = smoothTransition
+  })
+
+  useEffect(() => {
+ 
+    const smooth = e => {
+      if (e.target.className.includes('SliderContent')) {
+        transitionRef.current()
       }
-  
-      setState({
-        ...state,
-        activeIndex: activeIndex - 1,
-        translate: (activeIndex - 1) * getWidth()
-      })
-  }  
-
-  const nextSlide = () => {
-    console.log('nextSlide');
-    if (activeIndex === props.slides.length - 1) {
-      return setState({
-        ...state,
-        translate: 0,
-        activeIndex: 0
-      })
     }
+
+    const transitionEnd = window.addEventListener('transitionend', smooth)
+  
+    return () => {
+      window.removeEventListener('transitionend', transitionEnd)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (transition === 0) setState({ ...state, transition: 0.45 })
+  }, [transition])
+
+
+  const smoothTransition = () => {
+    let _slides = []
+
+    if (activeSlide === slides.length - 1)
+      _slides = [slides[slides.length - 2], lastSlide, firstSlide]
+    else if (activeSlide === 0) _slides = [lastSlide, firstSlide, secondSlide]
+    else _slides = slides.slice(activeSlide - 1, activeSlide + 2)
 
     setState({
       ...state,
-      activeIndex: activeIndex + 1,
-      translate: (activeIndex + 1) * getWidth()
+      _slides,
+      transition: 0,
+      translate: getWidth()
     })
-  }   
+  }
+
+  const nextSlide = () =>
+    setState({
+      ...state,
+      translate: translate + getWidth(),
+      activeSlide: activeSlide === slides.length - 1 ? 0 : activeSlide + 1
+    })
+
+  const prevSlide = () =>
+    setState({
+      ...state,
+      translate: 0,
+      activeSlide: activeSlide === 0 ? slides.length - 1 : activeSlide - 1
+    })
 
   return (
     <div css={SliderCSS}>
       <SliderContent
         translate={translate}
         transition={transition}
-        width={getWidth() * props.slides.length}
+        width={getWidth() * _slides.length}
       >
-        {props.slides.map((slide, i) => (
-          <Slide key={slide + i} content={slide} />
+        {_slides.map((_slide, i) => (
+          <Slide width={getWidth()} key={_slide + i} content={_slide} />
         ))}
       </SliderContent>
 
-
       <Arrow direction="left" handleClick={prevSlide} />
       <Arrow direction="right" handleClick={nextSlide} />
-      <Dots slides={props.slides} activeIndex={activeIndex} />
+
+      <Dots slides={slides} activeSlide={activeSlide} />
     </div>
   )
 }
 
 const SliderCSS = css`
   position: relative;
-  height: 70vh;
-  width: 70vw;
+  height: 80vh;
+  width: 100vw;
   margin: 0 auto;
   overflow: hidden;
+  white-space: nowrap;
 `
+
 export default Slider
