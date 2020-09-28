@@ -4,19 +4,23 @@ import { css, jsx } from '@emotion/core'
 
 
 
-const Title = ({ slides, activeSlide}) => (
+const Title = ({titleText}) => (
   <div
     css={css`
       position: absolute;
-      top: 100px;
+      bottom: 400px;
       width: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
+      letter-spacing:5px;
+      font-size: 50px;
+      font-weight: bold;
+      color: #191970;
     `}
   >
-    {slides[activeSlide].Title}
+    {titleText}
   </div>
 )
 
-export default Dots
+export default Title

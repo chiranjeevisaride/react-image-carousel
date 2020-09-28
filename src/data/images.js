@@ -1,14 +1,14 @@
 export const images = [
-    'https://images.unsplash.com/photo-1449034446853-66c86144b0ad?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2100&q=80',
-    'https://images.unsplash.com/photo-1470341223622-1019832be824?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2288&q=80',
-    'https://images.unsplash.com/photo-1448630360428-65456885c650?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2094&q=80',
-    'https://images.unsplash.com/photo-1534161308652-fdfcf10f62c4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2174&q=80'
+    'https://photos.zillowstatic.com/fp/172db863cf7bbe67be928dc5b7250e36-uncropped_scaled_within_1536_1152.webp',
+    'https://photos.zillowstatic.com/fp/b0951f097ee352f4c93fa61396d8f1d6-cc_ft_768.jpg',
+    'https://photos.zillowstatic.com/fp/cd3931f99440c846f70cbbbbc301a0a8-cc_ft_768.jpg',
+    'https://photos.zillowstatic.com/fp/291ad75d03d1dda38352c1e08337d462-cc_ft_768.jpg'
   ];
 
 
 export const imageTitles = [
-    'Title 1',
-    'Title 2',
-    'Title 3',
-    'Title 4',
+    '6552 Long Acres Dr, Sandy Springs, GA 30328',
+    '819 Forest Path Ln, Alpharetta, GA 30022',
+    '460 Wakefield Trce, Alpharetta, GA 30004',
+    '3760 Newport Bay Dr, Alpharetta, GA 30005',
 ];

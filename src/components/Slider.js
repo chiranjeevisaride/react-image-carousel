@@ -5,6 +5,7 @@ import SliderContent from './SliderContent'
 import Slide from './Slide'
 import Arrow from './Arrow'
 import Dots from './Dots'
+import Title from './Title';
 
 const getWidth = () => window.innerWidth
 
@@ -114,7 +115,7 @@ const Slider = props => {
         <Dots slides={slides} activeSlide={activeSlide} />
       </div>
       <div>
-           {titles[activeSlide]} 
+            <Title titleText={titles[activeSlide]}/> 
       </div>
       </div>
   )
